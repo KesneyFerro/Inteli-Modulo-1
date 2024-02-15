@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spritesheet Animation</title>
+    <style>
+        #sprite {
+            width: 64px;
+            height: 48px;
+            background-image: url('gato.png');
+            background-size: 400px 100px; /* largura total do spritesheet */
+            animation: animateSprite 1.0s steps(3) infinite; /* 5 frames no spritesheet */
+        }
+
+        @keyframes animateSprite {
+            from { background-position: 40px 0; }
+            to { background-position: 200px 0; } /* desloca o spritesheet horizontalmente */
+        }
+    </style>
+</head>
+<body>
+    <div id="sprite"></div>
+
+    <script>
+        // Adicione o código JavaScript aqui, se necessário
+    </script>
+</body>
+</html>

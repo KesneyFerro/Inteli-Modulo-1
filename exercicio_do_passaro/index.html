@@ -1,121 +1,120 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
-    <title>Exercício do Pássaro</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<!DOCTYPE html> <!-- Define o tipo de documento como HTML -->
+<html lang="pt-br"> <!-- Define o idioma da página como português do Brasil -->
+  <head>
+    <meta charset="UTF-8" /> <!-- Define o conjunto de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura a viewport para dispositivos móveis -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script> <!-- Importa a biblioteca Phaser -->
+    <title>Exercício do Pássaro</title> <!-- Define o título da página -->
+    <style> 
+      body {
+        display: flex; /* Configura o corpo da página como um flex container */
+        justify-content: center; /* Centraliza os elementos horizontalmente */
+        align-items: center; /* Centraliza os elementos verticalmente */
+        height: 100vh; /* Define a altura do corpo como 100% da altura da viewport */
+        margin: 0; /* Remove as margens padrão */
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <script>
+      // Configuração do jogo
+      var config = {
+        type: Phaser.AUTO, //Importa configurações automáticas do Phaser
+        width: 800, //Define o tamanho horizontal da tela para 800px
+        height: 600, //Define o tamanho horizontal da tela para 600px
 
-        // Configuração do jogo
-        var config = {
-            type: Phaser.AUTO,
-            width: 800,
-            height: 600,
-    
-            // Definição das cenas do jogo
-            scene: {
-                preload: preload, // Carrega os recursos do jogo
-                create: create, // Inicializa os elementos do jogo
-                update: update // Atualiza o estado do jogo
-            }
-        };
-    
-        var game = new Phaser.Game(config); // Cria uma instância do jogo
-    
-        var passarinho; // Variável para armazenar o passarinho
-        var vel = 16;
-    
-        function preload() {
-            // Carrega as imagens necessárias para o jogo
-            this.load.image('bg', 'assets/bg_space.png'); // Fundo do jogo
-            this.load.spritesheet('bird', 'assets/bird-red.png', {frameWidth: 75, frameHeight: 75}); // Sprite do passarinho
-        }
-    
-        function create() {
-            // Adiciona a imagem de fundo ao jogo
-            this.add.image(400, 300, 'bg').setScale(1.2);
+        // Definição das cenas do jogo
+        scene: {
+          preload: preload, // Carrega os recursos do jogo
+          create: create, // Inicializa os elementos do jogo
+          update: update, // Atualiza o estado do jogo
+        },
+      };
 
-            // Adiciona o sprite do passarinho ao jogo
-            passarinho = this.add.sprite(100, 300, 'bird',).setScale(1.3);
+      var game = new Phaser.Game(config); // Cria uma instância do jogo
 
-            // Cria a animação de voo para o passarinho
-            this.anims.create({
-                key: 'fly',
-                frames: this.anims.generateFrameNumbers('bird', {start: 0, end: 7}),
-                framerate: 8,
-                repeat: -1
-            });
-            
-            // Inicia a animação de voo do passarinho
-            passarinho.anims.play('fly', true);
-            passarinho.idaY = true; // Define a direção inicial do passarinho como subindo
-            passarinho.idaX = true; // Define a direção inicial do passarinho como indo para a direita        
-        }
+      var passarinho; // Variável para armazenar o passarinho
+      var vel = 16; //Variável para armazenar a velocidade do passarinho
 
-        function update() {
-        
-            // Movimento horizontal do passarinho
+      function preload() {
+        // Carrega as imagens necessárias para o jogo
+        this.load.image("bg", "assets/bg_space.png"); // Fundo do jogo 
+        this.load.spritesheet("bird", "assets/bird-red.png", { //Importa a spritesheet e "recorta" os frames no tamanho de 75px por 75px
+          frameWidth: 75,
+          frameHeight: 75,
+        }); // Sprite do passarinho 
+      }
 
-            if (passarinho.x <= 100) {
-                console.log('Se o passarinho estiver no ponto X inicial (100), iniciar ida e mudar a orientação do passarinho por meio do .setFlip que espelha a imagem');
-                passarinho.setFlip(false, false);
-                passarinho.idaX = true; // Define a direção horizontal como indo para a direita
-            };
-            
-            while (passarinho.x < 700 && passarinho.idaX === true) {
-                passarinho.x += vel;
-                break;
-            };
+      function create() {
+        // Adiciona a imagem de fundo ao jogo no ponto (400,300) com uma escala de 1,2
+        this.add.image(400, 300, "bg").setScale(1.2);
 
-            if (passarinho.x >= 700) {
-                console.log('Se o passarinho estiver no ponto X final (700), iniciar volta e mudar a orientação do passarinho por meio do .setFlip que espelha a imagem');
-                passarinho.setFlip(true, false);
-                passarinho.idaX = false; // Define a direção horizontal como indo para a esquerda
-            };
+        // Adiciona o sprite do passarinho ao jogo no ponto (100,300) com uma escala de 1,3
+        passarinho = this.add.sprite(100, 300, "bird").setScale(1.3);
 
-            while (passarinho.x > 100 && passarinho.idaX === false) {
-                passarinho.x -= vel;
-                break;
-            };
+        // Cria a animação de voo para o passarinho com a key: "fly" começando nos frames definidos de 0 a 7, repetição infinita e quantidade de quadros por segundo = 8
+        this.anims.create({
+          key: "fly",
+          frames: this.anims.generateFrameNumbers("bird", { start: 0, end: 7 }),
+          framerate: 8,
+          repeat: -1,
+        });
 
+        // Inicia a animação de voo do passarinho
+        passarinho.anims.play("fly", true); //Quando o passarinho é criado a animação dele "fly" inicia-se
+        passarinho.idaY = true; // Define a direção inicial do passarinho como subindo
+        passarinho.idaX = true; // Define a direção inicial do passarinho como indo para a direita
+      }
 
-            // Movimento vertical do passarinho
+      function update() {
+        // Movimento horizontal do passarinho
 
-            
-            if (passarinho.y >= 500) {
-                passarinho.idaY = true; // Define a direção vertical como subindo
-            };
-
-            while (passarinho.y < 500 && passarinho.idaY === false) {
-                passarinho.y += vel; // Move o passarinho para cima
-                break;
-            };
-
-            if (passarinho.y <= 100) {
-                passarinho.idaY = false; // Define a direção vertical como descendo
-            };
-
-            while (passarinho.y > 100 && passarinho.idaY === true) {
-                passarinho.y -= vel; // Move o passarinho para baixo
-                break;
-            };
-    
+        if (passarinho.x <= 100) { //Testa se o x do passarinho é menor ou igual a 100
+          console.log(
+            "Se o passarinho estiver no ponto X inicial (100), iniciar ida e mudar a orientação do passarinho por meio do .setFlip que espelha a imagem"
+          ); //Envia para o Console uma mensagem
+          passarinho.setFlip(false, false); //Define a inversão da imagem do personagem para virado para a direita e orientado em reflexo direto
+          passarinho.idaX = true; // Define a direção horizontal como indo para a direita
         }
 
-    </script>
+        while (passarinho.x < 700 && passarinho.idaX === true) { //Enquanto o x do passarinho é menor do que 700 e o estado passarinho X for verdadeiro
+          passarinho.x += vel; //O x do passarinho é adicionado ao valor da variavel de velocidade
+          break;// Termina o ciclo do while assim que o movimento é feito
+        }
 
-</body>
-</html>
+        if (passarinho.x >= 700) {//Testa se o x do passarinho é maior ou igual a 700
+          console.log(
+            "Se o passarinho estiver no ponto X final (700), iniciar volta e mudar a orientação do passarinho por meio do .setFlip que espelha a imagem"
+          );
+          passarinho.setFlip(true, false);//Define a inversão da imagem do personagem para virado para a esquerda e orientado em reflexo direto
+          passarinho.idaX = false; // Define a direção horizontal como indo para a esquerda
+        }
+
+        while (passarinho.x > 100 && passarinho.idaX === false) {//Enquanto o x do passarinho é maior do que 100 e o estado passarinho X for falso
+          passarinho.x -= vel;//O x do passarinho é subtraido ao valor da variavel de velocidade
+          break;// Termina o ciclo do while assim que o movimento é feito
+        }
+
+        // Movimento vertical do passarinho
+
+        if (passarinho.y >= 500) { //se o y do passarinho é maior ou igual a 500
+          passarinho.idaY = true; // Define a direção vertical como verdadeiro = subindo
+        }
+
+        while (passarinho.y < 500 && passarinho.idaY === false) {//Enquanto o y do passarinho é menor do que 500 e o estado passarinho y for falso
+          passarinho.y += vel; // Move o passarinho para cima somando o valor da variávle 
+          break;// Termina o ciclo do while assim que o movimento é feito
+        }
+
+        if (passarinho.y <= 100) { //se o y do passarinho é menor ou igual a 100
+          passarinho.idaY = false; // Define a direção vertical como falso = descendo
+        }
+
+        while (passarinho.y > 100 && passarinho.idaY === true) {//Enquanto o y do passarinho é maior do que 100 e o estado passarinho y for verdadeiro
+          passarinho.y -= vel; // Move o passarinho para baixo
+          break;// Termina o ciclo do while assim que o movimento é feito
+        }
+      }
+    </script> <!-- fecha a tag script-->
+  </body><!-- fecha a tag body-->
+</html><!-- fecha a tag html-->

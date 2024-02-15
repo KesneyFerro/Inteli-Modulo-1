@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spritesheet Animation</title>
+    <style>
+        #sprite {
+            width: 200px;
+            height: 2500px;
+            background-image: url('homem-barba.png');
+            background-size: 3000px 3000px; /* largura total do spritesheet */
+            animation: animateSprite 1.5s steps(16) infinite; /* 5 frames no spritesheet */
+        }
+
+        @keyframes animateSprite {
+            from { background-position: 200 0; }
+            to { background-position: 500px 0; } /* desloca o spritesheet horizontalmente */
+        }
+    </style>
+</head>
+<body>
+    <div id="sprite"></div>
+
+    <script>
+        // Adicione o código JavaScript aqui, se necessário
+    </script>
+</body>
+</html>

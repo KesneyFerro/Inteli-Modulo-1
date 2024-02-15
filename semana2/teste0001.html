@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spritesheet Animation</title>
+    <style>
+        #sprite {
+            width: 30px;
+            height: 200px;
+            background-image: url('menino-chapeu.png');
+            background-size: 200px 200px; /* largura total do spritesheet */
+            animation: animateSprite 1.5s steps(5) infinite; /* 5 frames no spritesheet */
+        }
+
+        @keyframes animateSprite {
+            from { background-position: 0 0; }
+            to { background-position: -500px 0; } /* desloca o spritesheet horizontalmente */
+        }
+    </style>
+</head>
+<body>
+    <div id="sprite"></div>
+
+    <script>
+        // Adicione o código JavaScript aqui, se necessário
+    </script>
+</body>
+</html>
