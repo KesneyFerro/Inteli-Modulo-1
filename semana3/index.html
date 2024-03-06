@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phaser Game</title>
+    <style>
+        #inputOverlay {
+            position: absolute;
+            top: 100px;
+            left: 20%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+</head>
+<body>
+
+<div id="inputOverlay">
+    <input type="text" id="nameInput" placeholder="Digite seu nome">
+    <button id="startButton">Iniciar</button>
+</div>
+
+<script src="MainScene.js"></script>
+<script src="WelcomeScene.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
